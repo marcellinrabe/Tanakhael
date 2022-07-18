@@ -1,0 +1,6 @@
+API/__pycache__/
+Bot/__pycache__/
+Bot/.env
+Bot/.env.bat
+Bot/ngrok
+Bot/ngrok.exe
