@@ -1,5 +1,5 @@
-API/__pycache__/
-Bot/__pycache__/
+__pycache__
+ *.pyc
 Bot/.env
 Bot/.env.bat
 Bot/ngrok
