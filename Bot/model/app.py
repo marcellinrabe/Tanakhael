@@ -1,12 +1,13 @@
 import requests
 import json
-from conf import Configuration
+from ampalibe import Model
 
 
+class Fetch(Model):
 
-class Fetch():
+    def __init__(self, conf):
+        super().__init__(conf)
 
-    
     def verse(self, versets: str)-> dict:
         """
             returns the verses coming from the api in a dictionary

@@ -5,7 +5,7 @@ from model.app import Fetch
 from model.Upload import Upload
 
 Views = View()
-Fetchs = Fetch()
+Fetchs = Fetch(Configuration())
 
 @ampalibe.command("/")
 def start(sender_id, cmd, **extends):

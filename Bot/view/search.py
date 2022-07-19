@@ -7,5 +7,5 @@ class Search:
         """
             video example of search input format
         """
-
+        self.chat.send_message(sender_id, "afaka manadina ianao")
         pass
