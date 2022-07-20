@@ -1,7 +1,8 @@
-__pycache__
+__pycache__/
 */*.pyc
 Bot/.env
 Bot/.env.bat
 Bot/ngrok
 Bot/ngrok.exe
 baiboly.db
+baiboly-json
