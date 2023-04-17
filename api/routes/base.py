@@ -31,3 +31,25 @@ def search_verse(verse: str, collection: str):
     db_search_filter = uri.build_filter()
     documents = verse_service.show_verse(collection, db_search_filter)
     return JSONResponse(content=documents)
+
+
+@api.get("/collection/list")
+def collections():
+    documents = verse_service.show_collection_list()
+    return JSONResponse(content=documents)
+
+
+@api.get("/collection/books")
+def collection_book(collection: str):
+    documents = verse_service.offer_collection_books(collection)
+    return JSONResponse(content=documents)
+
+
+@api.get("/book/chapter/count")
+def book_chapters(collection: str, book: str):
+    return verse_service.count_book_chapters(collection, book)
+
+
+@api.get("/chapter/verse/count")
+def chapter_verses(collection: str, book: str, index: int):
+    return verse_service.count_chapter_verses(collection, book, index)
