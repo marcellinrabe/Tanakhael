@@ -1,6 +1,6 @@
 """Verse model"""
 
-from re import findall, match, sub
+from re import match, sub
 
 
 class Verse:
@@ -31,6 +31,6 @@ class Verse:
             if end < begin:
                 return None
             return end - begin
-        return 1
+        return 0
 
 

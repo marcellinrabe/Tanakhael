@@ -42,31 +42,42 @@ class Uri:
 
         book, chapter, verse_interval = self.parse_verse()
         verse = Verse(book, chapter, verse_interval)
+        end_cursor = verse.pointer + verse.limit + 1
 
-        print(verse.limit)
-
-        if verse.limit == 1:
+        if verse.limit == 0:
             return {
-                "arg_1": {
-                    "meta.name": verse.book
-                },
-                "arg_2": {
-                    f"{verse.chapter}": {
-                        f"{verse.pointer}": 1
+                "filters": {
+                    "arg_1": {
+                        "meta.name": verse.book
                     },
-                    "_id": 0
-                }
+                    "arg_2": {
+                        f"{verse.chapter}": {
+                            f"{verse.pointer}": 1
+                        },
+                        "_id": 0
+                    },
+                },
+                "book": verse.book,
+                "chapter": verse.chapter,
+                "pointer": verse.pointer,
+                "end_cursor": None
             }
 
-        elif verse.limit > 1:
-            arg_2 = {f"{i}": 1 for i in range(verse.pointer, verse.pointer + verse.limit + 1)}
-
+        elif verse.limit > 0:
+            arg_2 = {f"{i}": 1 for i in range(verse.pointer, end_cursor)}
+            print(arg_2)
             return {
-                "arg_1": {
-                    "meta.name": verse.book
+                "filters": {
+                    "arg_1": {
+                        "meta.name": verse.book
+                    },
+                    "arg_2": {
+                        f"{verse.chapter}": arg_2,
+                        "_id": 0
+                    },
                 },
-                "arg_2": {
-                    f"{verse.chapter}": arg_2,
-                    "_id": 0
-                },
+                "book": verse.book,
+                "chapter": verse.chapter,
+                "pointer": verse.pointer,
+                "end_cursor": end_cursor
             }
