@@ -8,6 +8,7 @@ class VerseService:
 
     def _parse_json_dict(self, cursor):
         return [doc for doc in cursor]
+
     def _parse_verse_dict(self, cursor):
         """Parse documents object from pymongo to FastAPI JSON supported argument"""
         documents = []
@@ -19,7 +20,14 @@ class VerseService:
 
     def show_collection_list(self):
         cursor = self.db_connection.db.list_collection_names()
-        return self._parse_json_dict(cursor)
+        testaments_database = self._parse_json_dict(cursor)
+        output = []
+        for testament_database_name in testaments_database:
+            testament = " ".join(
+                testament_database_name.split("_")
+            )
+            output.append(testament)
+        return output
 
     def show_verse(self, collection_name, meta):
         """deliver verset text according to uri"""
@@ -34,32 +42,24 @@ class VerseService:
             "verses": verses
         }
 
-    def offer_collection_books(self, collection_name):
+    def offer_collection_books(self, testament):
         fields_filter = {
             "meta.name": 1,
+            "meta.chapter_number": 1,
             "_id": 0
         }
-        collection = self.db_connection.db[collection_name]
+        collection = self.db_connection.db[testament]
         cursor = collection.find({}, fields_filter)
         return self._parse_json_dict(cursor)
 
-    def count_book_chapters(self, collection_name, book_name) -> int:
+    def count_verse(self, testament, book, chapter) -> int:
         search_filter = {
-            "arg_1": {"meta.name": book_name},
-            "arg_2": {"meta": 0, "_id": 0}
-        }
-        collection = self.db_connection.db[collection_name]
-        document = collection.find_one(search_filter["arg_1"],search_filter["arg_2"])
-        return len(document)
-
-    def count_chapter_verses(self, collection_name, book_name, chapter_index) -> int:
-        search_filter = {
-            "meta.name": book_name,
-            f"{chapter_index}": {
+            "meta.name": book,
+            f"{chapter}": {
                 "$exists": True
             }
         }
-        collection = self.db_connection.db[collection_name]
+        collection = self.db_connection.db[testament]
         document = collection.find_one(search_filter)
-        return len(document[f"{chapter_index}"])
+        return len(document[f"{chapter}"])
 
