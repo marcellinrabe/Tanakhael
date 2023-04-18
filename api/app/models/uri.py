@@ -65,7 +65,6 @@ class Uri:
 
         elif verse.limit > 0:
             arg_2 = {f"{i}": 1 for i in range(verse.pointer, end_cursor)}
-            print(arg_2)
             return {
                 "filters": {
                     "arg_1": {
