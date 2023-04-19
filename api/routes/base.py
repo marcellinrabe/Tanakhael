@@ -4,11 +4,11 @@ from fastapi.responses import JSONResponse
 from os import environ
 from dotenv import load_dotenv
 
-from api.database.connection import DBConnection
+from database.connection import DBConnection
 
-from api.app.models.uri import Uri
+from models.uri import Uri
 
-from api.services.offerverse import VerseService
+from services.offerverse import VerseService
 
 load_dotenv()
 
