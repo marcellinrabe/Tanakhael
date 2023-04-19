@@ -1,7 +1,13 @@
 """main controller"""
 
 from uvicorn import run
+from os import environ
+from dotenv import load_dotenv
 
+load_dotenv()
+
+HOST = environ.get("HOST")
+PORT = environ.get("PORT")
 
 class BaseController:
 
@@ -10,7 +16,7 @@ class BaseController:
 
     def run(self):
         """Initialise app and listener"""
-        run(self.api, host="127.0.0.1", port=8080)
+        run(self.api, host=f"{HOST}", port=int(PORT))
 
 
 
