@@ -147,6 +147,7 @@ class UserView:
                     )
                 )
 
+        self.chat.send_text(sender_id, "...")
         self.propose_new_session(sender_id)
 
     def say_goodbye(self, sender_id):

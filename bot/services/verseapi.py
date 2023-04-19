@@ -1,9 +1,12 @@
 """Service around getting verse"""
 
 import requests
+from os import environ
+from dotenv import load_dotenv
 
-# on development
-PROXY = "http://localhost:8000"
+load_dotenv()
+
+PROXY = environ.get("API_URL")
 
 
 def get(request):
