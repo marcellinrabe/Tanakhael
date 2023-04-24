@@ -17,10 +17,11 @@ def choice_testament(sender_id, cmd, suggestion=None, **ext):
         elif "eny" in suggestion:
             controller.choice_testament(sender_id)
         return None
-
-    if str(cmd).lower() in greetings:
-        controller.choice_testament(sender_id)
-        return None
+    
+    for greeting in greetings:
+        if greeting in str(cmd).lower():
+            controller.choice_testament(sender_id)
+            return None
 
     controller.propose_greeting_keys(sender_id, greetings)
 
